@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
   <div class="container form-container">
-    <form class="signup-form">
+    <form class="signup-form" id="login_form">
 
       <fieldset>
         <label>
@@ -9,8 +9,11 @@
           <input
             type="email"
             name="email"
+            id="email"
+            [pattern]="emailRegexp"
             required
           />
+          <small class="invalid-text" id="invalid-email"></small>
         </label>
 
         <label>
@@ -18,8 +21,11 @@
           <input
             type="password"
             name="password"
+            id="password"
+            minlength="6"
             required
           />
+          <small class="invalid-text" id="invalid-password"></small>
         </label>
 
         <label>
@@ -27,14 +33,20 @@
           <input
             type="password"
             name="confirm_password"
+            id="confirm_password"
+            minlength="6"
             required
           />
+          <small class="invalid-text" id="invalid-confirm-password"></small>
+
         </label>
       </fieldset>
 
+      <div class="info-msg" *ngIf="infoMessage">{{infoMessage}}</div>
+
       <div class="grid">
-        <input type="reset" value="Reset"/>
-        <input type="submit" value="Sign up">
+        <button type="button" class="secondary" id="reset_btn" [disabled]="!touchedInputsSet.size">Reset</button>
+        <button type="submit" id="submit_btn" disabled>Sign up</button>
       </div>
 
     </form>
